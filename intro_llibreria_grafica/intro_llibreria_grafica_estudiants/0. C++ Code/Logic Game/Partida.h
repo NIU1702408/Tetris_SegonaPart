@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <string>
 #include "InfoJoc.h"
+#include "joc.h"
 
 using namespace std;
 
