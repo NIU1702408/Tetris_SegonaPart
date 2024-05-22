@@ -18,7 +18,19 @@ Tauler::Tauler(ColorFigura tauler[MAX_COL][MAX_FILA])
 
 void Tauler::dibuixa() const
 {
-
+	for (int i = 0; i < N_FILES_TAULER; i++)
+	{
+		for (int j = 0; j < N_COL_TAULER; j++)
+		{
+			if (m_tauler[i][j] != COLOR_NEGRE)
+			{
+				IMAGE_NAME color = colorToPng(m_tauler[i][j]);
+				GraphicManager::getInstance()->drawSprite(color,
+					POS_X_TAULER + (j * MIDA_QUADRAT),
+					POS_Y_TAULER + MIDA_QUADRAT * (i + 1), false);
+			}
+		}
+	}
 }
 
 //comprova si la posició és vàlida

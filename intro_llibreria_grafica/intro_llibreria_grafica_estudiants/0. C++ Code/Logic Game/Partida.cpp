@@ -6,11 +6,10 @@
 
 void Partida::actualitza(double deltaTime)
 {
-    Figura figura(FIGURA_S);
-
     GraphicManager::getInstance()->drawSprite(GRAFIC_FONS, 0, 0, false);
     GraphicManager::getInstance()->drawSprite(GRAFIC_TAULER, POS_X_TAULER, POS_Y_TAULER, false);
-    figura.dibuixa();
-    
+    m_joc.dibuixa();
+
+
 }
 

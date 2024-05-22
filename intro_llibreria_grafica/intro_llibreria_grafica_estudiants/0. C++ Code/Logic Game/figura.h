@@ -2,6 +2,8 @@
 #define FIGURA_H
 #include "InfoJoc.h"
 
+IMAGE_NAME colorToPng(ColorFigura color);
+
 class Figura
 {
 public:
