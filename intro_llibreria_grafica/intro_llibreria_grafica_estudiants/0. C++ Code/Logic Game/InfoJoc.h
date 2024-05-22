@@ -1,6 +1,21 @@
 #ifndef INFO_JOC_H
 #define INFO_JOC_H
 
+const int MAX_ALCADA = 4;
+const int MAX_AMPLADA = 4;
+
+typedef struct
+{
+    int vertical;
+    int horitzontal;
+} Posicio;
+
+typedef enum
+{
+    GIR_HORARI = 0,
+    GIR_ANTI_HORARI
+} DireccioGir;
+
 typedef enum
 {
     TECLA_ESQUERRA,
