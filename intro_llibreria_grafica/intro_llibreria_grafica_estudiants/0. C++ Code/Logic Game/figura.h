@@ -7,6 +7,7 @@ class Figura
 public:
     Figura();
     Figura(TipusFigura figura);
+    Figura(TipusFigura figura, Posicio posicio);
 
     ColorFigura getColor() const { return m_color; }
     int getMida() const { return m_mida; }
@@ -27,4 +28,5 @@ private:
     ColorFigura m_figura[MAX_ALCADA][MAX_AMPLADA]; //matriu amb la forma de la figura i color
 
 };
+
 #endif
