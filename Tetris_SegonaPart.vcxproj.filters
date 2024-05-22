@@ -32,5 +32,8 @@
     <ClInclude Include="intro_llibreria_grafica\intro_llibreria_grafica_estudiants\2. Platforms\0. Windows Desktop\extlibs\SDL\include\SDL.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
+    <ClInclude Include="intro_llibreria_grafica\intro_llibreria_grafica_estudiants\0. C++ Code\Logic Game\GraphicManager.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

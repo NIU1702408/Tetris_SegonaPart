@@ -131,6 +131,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="intro_llibreria_grafica\intro_llibreria_grafica_estudiants\0. C++ Code\Graphic Lib\keyboard_sdl.h" />
+    <ClInclude Include="intro_llibreria_grafica\intro_llibreria_grafica_estudiants\0. C++ Code\Logic Game\GraphicManager.h" />
     <ClInclude Include="intro_llibreria_grafica\intro_llibreria_grafica_estudiants\0. C++ Code\Logic Game\InfoJoc.h" />
     <ClInclude Include="intro_llibreria_grafica\intro_llibreria_grafica_estudiants\0. C++ Code\Logic Game\Partida.h" />
     <ClInclude Include="intro_llibreria_grafica\intro_llibreria_grafica_estudiants\2. Platforms\0. Windows Desktop\extlibs\SDL\include\SDL.h" />

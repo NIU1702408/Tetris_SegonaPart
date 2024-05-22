@@ -1,6 +1,8 @@
 #include "Partida.h"
 #include "InfoJoc.h"
 #include "GraphicManager.h"
+#include "../Graphic Lib/libreria.h"
+#include "../Graphic Lib/keyboard_sdl.h"
 
 Partida::Partida()
 {
