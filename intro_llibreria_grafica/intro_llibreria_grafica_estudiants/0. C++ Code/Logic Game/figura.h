@@ -1,5 +1,6 @@
 #ifndef FIGURA_H
 #define FIGURA_H
+#include "InfoJoc.h"
 
 class Figura
 {
