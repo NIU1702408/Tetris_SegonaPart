@@ -129,3 +129,8 @@ void Joc::escriuTauler(const string& nomFitxer)
 		fitxer.close();
 	}
 }
+
+void Joc::dibuixa() const
+{
+
+}

@@ -16,6 +16,11 @@ Tauler::Tauler(ColorFigura tauler[MAX_COL][MAX_FILA])
 			m_tauler[i][j] = tauler[i][j];
 }
 
+void Tauler::dibuixa() const
+{
+
+}
+
 //comprova si la posició és vàlida
 bool Tauler::posicioValida(const Posicio& pos) const
 {

@@ -90,6 +90,44 @@ Figura::Figura(TipusFigura tipusFigura)
 	}
 }
 
+IMAGE_NAME colorToPng(ColorFigura color)
+{
+	switch (color)
+	{
+	case COLOR_GROC:    return GRAFIC_QUADRAT_GROC;
+		break;
+	case COLOR_BLAUCEL: return GRAFIC_QUADRAT_BLAUCEL;
+		break;
+	case COLOR_BLAUFOSC:return GRAFIC_QUADRAT_BLAUFOSC;
+		break;
+	case COLOR_MAGENTA: return GRAFIC_QUADRAT_MAGENTA;
+		break;
+	case COLOR_TARONJA: return GRAFIC_QUADRAT_TARONJA;
+		break;
+	case COLOR_VERD:    return GRAFIC_QUADRAT_VERD;
+		break;
+	case COLOR_VERMELL: return GRAFIC_QUADRAT_VERMELL;
+		break;
+	default:    return GRAFIC_FONS;
+		break;
+	}
+}
+
+void Figura::dibuixa() const
+{
+	IMAGE_NAME color = colorToPng(m_color);
+	for (int i = 0; i < m_mida; i++)
+	{
+		for (int j = 0; j < m_mida; j++)
+		{
+			if (m_figura[i][j] != NO_COLOR)
+				GraphicManager::getInstance()->drawSprite(color, 
+					POS_X_TAULER + (m_posicio.vertical * MIDA_QUADRAT) + (j * MIDA_QUADRAT), 
+					POS_Y_TAULER + ((m_posicio.horitzontal + 1) * MIDA_QUADRAT) + ((i + 1) * MIDA_QUADRAT), false);
+		}
+	}
+}
+
 //Inicialitza una figura com amb el constructor, però permet reinicialitzar una figura existent amb un nou tipus
 void Figura::incialitza(TipusFigura tipusFigura)
 {
