@@ -14,6 +14,7 @@ public:
     Posicio getPosicio() const { return m_posicio; }
     void setPosicio(const Posicio& pos) { m_posicio = pos; }
 
+    void dibuixa() const;
     void incialitza(TipusFigura figura);
     void girar(const DireccioGir& gir);
     void baixar(const int& dirY);

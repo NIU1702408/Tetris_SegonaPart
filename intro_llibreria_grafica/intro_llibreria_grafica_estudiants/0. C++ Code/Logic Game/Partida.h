@@ -15,7 +15,6 @@ public:
     Partida(const string& nomFitxer) : m_temps(0) { m_joc.inicialitza(nomFitxer); }
 
     void inicialitza(const string& nomFitxer) { m_temps = 0; m_joc.inicialitza(nomFitxer); }
-    void dibuixa(); //dibuixa figura a la posicio actual
     void actualitza(double deltaTime);
 private:
     double m_temps;
