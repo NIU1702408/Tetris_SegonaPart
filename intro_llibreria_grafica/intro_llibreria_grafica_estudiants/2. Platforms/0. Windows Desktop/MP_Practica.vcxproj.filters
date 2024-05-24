@@ -129,7 +129,4 @@
       <UniqueIdentifier>{cbe27357-35d7-40c4-ae4b-908075278f4d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
-  <ItemGroup>
-    <Text Include="prova_inicialitza.txt" />
-  </ItemGroup>
 </Project>

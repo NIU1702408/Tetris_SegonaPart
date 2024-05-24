@@ -18,7 +18,7 @@ public:
     void setPosicio(const Posicio& pos) { m_posicio = pos; }
 
     void dibuixa() const;
-    void incialitza(TipusFigura figura);
+    void inicialitza(TipusFigura figura);
     void girar(const DireccioGir& gir);
     void baixar(const int& dirY);
     void desplacar(const int& dirX);

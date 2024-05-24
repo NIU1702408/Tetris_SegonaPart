@@ -1,14 +1,10 @@
 #include "Partida.h"
-#include "InfoJoc.h"
-#include "GraphicManager.h"
-#include "../Graphic Lib/libreria.h"
-#include "../Graphic Lib/keyboard_sdl.h"
 
 void Partida::actualitza(double deltaTime)
 {
-    GraphicManager::getInstance()->drawSprite(GRAFIC_FONS, 0, 0, false);
-    GraphicManager::getInstance()->drawSprite(GRAFIC_TAULER, POS_X_TAULER, POS_Y_TAULER, false);
-    m_joc.dibuixa();
+	GraphicManager::getInstance()->drawSprite(GRAFIC_FONS, 0, 0, false);
+	GraphicManager::getInstance()->drawSprite(GRAFIC_TAULER, POS_X_TAULER, POS_Y_TAULER, false);
+	m_joc.dibuixa();
 
 	if (!m_joc.getFiguraCollocada())
 	{
@@ -33,4 +29,6 @@ void Partida::actualitza(double deltaTime)
 			m_temps = 0.0;
 		}
 	}
+	else
+		m_joc.novaFigura(TipusFigura(1 + rand() % N_TIPUS_FIGURES));
 }

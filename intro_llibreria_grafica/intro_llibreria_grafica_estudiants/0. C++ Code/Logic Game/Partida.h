@@ -1,9 +1,5 @@
 #ifndef PARTIDA_H
 #define PARTIDA_H
-
-#include <stdio.h>
-#include <string>
-#include "InfoJoc.h"
 #include "joc.h"
 
 using namespace std;

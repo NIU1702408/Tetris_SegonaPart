@@ -202,7 +202,7 @@ void Figura::dibuixa() const
 }
 
 //Inicialitza una figura com amb el constructor, però permet reinicialitzar una figura existent amb un nou tipus
-void Figura::incialitza(TipusFigura tipusFigura)
+void Figura::inicialitza(TipusFigura tipusFigura)
 {
 	m_mida = 0;
 	m_tipusFigura = tipusFigura;

@@ -14,7 +14,7 @@ void Joc::inicialitza(const string& nomFitxer)
 	{
 		//llegeix figura, posició (x,y), gir (posició de la figura), i el tauler amb els seus colors
 		fitxer >> tipus;
-		m_figura.incialitza(TipusFigura(tipus));
+		m_figura.inicialitza(TipusFigura(tipus));
 
 		fitxer >> posicio.vertical >> posicio.horitzontal;
 
@@ -41,6 +41,14 @@ void Joc::inicialitza(const string& nomFitxer)
 
 		fitxer.close();
 	}
+}
+
+void Joc::novaFigura(const TipusFigura& tipus)
+{
+	m_figura.inicialitza(tipus);
+	m_posicio.horitzontal = 0;
+	m_posicio.vertical = 0;
+	m_figuraCollocada = false;
 }
 
 //gira la figura en la direcció especificada, verifica si el moviment és vàlid i ajusta la rotació de la figura en cas de que no ho sigui
