@@ -3,16 +3,16 @@
 //Constructor predeterminat, inicialitza la matriu tauler amb el color negre
 Tauler::Tauler()
 {
-	for (int i = 0; i < MAX_COL; i++)
-		for (int j = 0; j < MAX_FILA; j++)
+	for (int i = 0; i < N_FILES_TAULER; i++)
+		for (int j = 0; j < N_COL_TAULER; j++)
 			m_tauler[i][j] = COLOR_NEGRE;
 }
 
 //inicialitza el tauler amb el tauler passat com a paràmetre
-Tauler::Tauler(ColorFigura tauler[MAX_COL][MAX_FILA])
+Tauler::Tauler(ColorFigura tauler[N_FILES_TAULER][N_COL_TAULER])
 {
-	for (int i = 0; i < MAX_COL; i++)
-		for (int j = 0; j < MAX_FILA; j++)
+	for (int i = 0; i < N_FILES_TAULER; i++)
+		for (int j = 0; j < N_COL_TAULER; j++)
 			m_tauler[i][j] = tauler[i][j];
 }
 
@@ -26,10 +26,10 @@ void Tauler::dibuixa() const
 			{
 				IMAGE_NAME color = colorToPng(m_tauler[i][j]);
 				GraphicManager::getInstance()->drawSprite(color,
-					POS_X_TAULER + (j * MIDA_QUADRAT),
-					POS_Y_TAULER + MIDA_QUADRAT * (i + 1), false);
+					POS_X_TAULER + ((j + 1) * MIDA_QUADRAT),
+					POS_Y_TAULER + (MIDA_QUADRAT * i), false);
 			}
-		}
+ 		}
 	}
 }
 
@@ -39,7 +39,7 @@ bool Tauler::posicioValida(const Posicio& pos) const
 	bool esValid = true;
 
 	//verifica si la posició està dins els límits del tauler
-	if (0 > pos.horitzontal || pos.horitzontal >= MAX_FILA || pos.vertical >= MAX_COL)
+	if (0 > pos.horitzontal || pos.horitzontal >= N_COL_TAULER || pos.vertical >= N_FILES_TAULER)
 		esValid = false;
 	else
 	{
@@ -88,12 +88,12 @@ int Tauler::eliminarFilesCompletades()
 	int nCompletades = 0;
 
 	// Comprovar totes les files i buscar las filas completadas
-	for (int i = 0; i < MAX_FILA; ++i)
+	for (int i = 0; i < N_FILES_TAULER; ++i)
 	{
 		bool completa = true;
 		int j = 0;
 
-		while (j < MAX_COL&& completa)
+		while (j < N_COL_TAULER && completa)
 		{
 			//si hi ha una casella de color negre, no estarà completa la celda
 			if (m_tauler[i][j] == 0) {
@@ -107,10 +107,10 @@ int Tauler::eliminarFilesCompletades()
 		{
 			nCompletades++;
 			for (int fila = i; fila > 0; --fila)
-				for (int k = 0; k < MAX_COL; ++k)
+				for (int k = 0; k < N_COL_TAULER; ++k)
 					m_tauler[fila][k] = m_tauler[fila - 1][k];
 
-			for (int k = 0; k < MAX_COL; ++k)
+			for (int k = 0; k < N_COL_TAULER; ++k)
 				m_tauler[0][k] = COLOR_NEGRE;
 		}
 

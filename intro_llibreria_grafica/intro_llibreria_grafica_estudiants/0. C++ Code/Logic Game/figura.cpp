@@ -195,8 +195,8 @@ void Figura::dibuixa() const
 		{
 			if (m_figura[i][j] != NO_COLOR)
 				GraphicManager::getInstance()->drawSprite(color, 
-					POS_X_TAULER + ((m_posicio.vertical + 1) * MIDA_QUADRAT) + (j * MIDA_QUADRAT),
-					POS_Y_TAULER + (m_posicio.horitzontal * MIDA_QUADRAT) + (i * MIDA_QUADRAT), false);
+					POS_X_TAULER + ((m_posicio.horitzontal + 1 + j) * MIDA_QUADRAT),
+					POS_Y_TAULER + ((m_posicio.vertical + i) * MIDA_QUADRAT), false);
 		}
 	}
 }

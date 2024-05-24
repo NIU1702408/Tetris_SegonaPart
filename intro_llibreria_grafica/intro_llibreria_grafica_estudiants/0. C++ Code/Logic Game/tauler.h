@@ -2,14 +2,11 @@
 #define TAULER_H
 #include "Figura.h"
 
-const int MAX_FILA = 8;
-const int MAX_COL = 8;
-
 class Tauler
 {
 public:
 	Tauler();
-	Tauler(ColorFigura tauler[MAX_COL][MAX_FILA]);
+	Tauler(ColorFigura tauler[N_FILES_TAULER][N_COL_TAULER]);
 
 	ColorFigura getTauler(const int& x, const int& y) const { return m_tauler[x][y]; }
 	void setTauler(ColorFigura color, int posX, int posY) { m_tauler[posX][posY] = color; }
@@ -22,6 +19,6 @@ public:
 private:
 	bool posicioValida(const Posicio& pos) const;
 
-	ColorFigura m_tauler[MAX_COL][MAX_FILA];
+	ColorFigura m_tauler[N_FILES_TAULER][N_COL_TAULER];
 };
 #endif

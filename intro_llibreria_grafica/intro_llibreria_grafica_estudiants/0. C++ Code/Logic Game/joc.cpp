@@ -28,9 +28,9 @@ void Joc::inicialitza(const string& nomFitxer)
 		for (int i = 0; i < gir; i++)
 			m_figura.girar(GIR_HORARI);
 
-		for (int i = 0; i < MAX_COL; i++)
+		for (int i = 0; i < N_FILES_TAULER; i++)
 		{
-			for (int j = 0; j < MAX_FILA; j++)
+			for (int j = 0; j < N_COL_TAULER; j++)
 			{
 				int color;
 				fitxer >> color;
@@ -116,9 +116,9 @@ void Joc::escriuTauler(const string& nomFitxer)
 			m_tauler.collocarFigura(m_figura, m_posicio);
 
 		//s'escriu el tauler en el document
-		for (int i = 0; i < MAX_COL; i++)
+		for (int i = 0; i < N_COL_TAULER; i++)
 		{
-			for (int j = 0; j < MAX_FILA; j++)
+			for (int j = 0; j < N_FILES_TAULER; j++)
 				fitxer << int(m_tauler.getTauler(i, j)) << " ";
 			fitxer << endl;
 		}

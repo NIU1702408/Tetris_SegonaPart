@@ -18,6 +18,8 @@ public:
 	int baixaFigura();
 	void escriuTauler(const string& nomFitxer);
 	void dibuixa() const;
+	void dibuixaTauler() const { m_tauler.dibuixa(); }
+	void dibuixaFigura() const { m_figura.dibuixa(); }
 private:
 	Tauler m_tauler;
 	Figura m_figura;
