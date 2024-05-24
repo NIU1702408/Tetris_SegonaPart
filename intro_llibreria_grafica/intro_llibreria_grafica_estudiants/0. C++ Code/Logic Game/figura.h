@@ -2,11 +2,14 @@
 #define FIGURA_H
 #include "InfoJoc.h"
 
+IMAGE_NAME colorToPng(ColorFigura color);
+
 class Figura
 {
 public:
     Figura();
     Figura(TipusFigura figura);
+    Figura(TipusFigura figura, Posicio posicio);
 
     ColorFigura getColor() const { return m_color; }
     int getMida() const { return m_mida; }
@@ -14,7 +17,8 @@ public:
     Posicio getPosicio() const { return m_posicio; }
     void setPosicio(const Posicio& pos) { m_posicio = pos; }
 
-    void incialitza(TipusFigura figura);
+    void dibuixa() const;
+    void inicialitza(TipusFigura figura);
     void girar(const DireccioGir& gir);
     void baixar(const int& dirY);
     void desplacar(const int& dirX);
@@ -26,4 +30,5 @@ private:
     ColorFigura m_figura[MAX_ALCADA][MAX_AMPLADA]; //matriu amb la forma de la figura i color
 
 };
+
 #endif

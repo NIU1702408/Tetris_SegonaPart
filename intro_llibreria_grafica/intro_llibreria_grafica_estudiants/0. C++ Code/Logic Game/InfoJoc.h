@@ -1,6 +1,16 @@
 #ifndef INFO_JOC_H
 #define INFO_JOC_H
 
+#include "GraphicManager.h"
+#include "../Graphic Lib/libreria.h"
+#include "../Graphic Lib/keyboard_sdl.h"
+#include <iostream>
+#include <string>
+#include <fstream>
+#include <stdio.h>
+#include <cstdlib>
+using namespace std;
+
 const int MAX_ALCADA = 4;
 const int MAX_AMPLADA = 4;
 

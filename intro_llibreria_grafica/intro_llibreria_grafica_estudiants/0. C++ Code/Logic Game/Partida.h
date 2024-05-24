@@ -1,25 +1,20 @@
 #ifndef PARTIDA_H
 #define PARTIDA_H
-
-#include <stdio.h>
-#include <string>
-#include "InfoJoc.h"
+#include "joc.h"
 
 using namespace std;
 
 class Partida 
 {
 public:
-    Partida();
-    
+    Partida() : m_temps(0) {};
+    Partida(const string& nomFitxer) : m_temps(0) { m_joc.inicialitza(nomFitxer); }
+
+    void inicialitza(const string& nomFitxer) { m_temps = 0; m_joc.inicialitza(nomFitxer); }
     void actualitza(double deltaTime);
 private:
     double m_temps;
-    // Atributs necessaris només pels exemples d'utilització de la llibreria. 
-    // S'hauran d'eliminar per la implementació del projecte
-    static const int MIDA = 4;
-    ColorFigura m_forma[MIDA][MIDA];
-    int m_fila, m_columna;
+    Joc m_joc;
 };
 
 #endif 
