@@ -11,6 +11,7 @@ class Joc
 {
 public:
 	Joc() { m_posicio.vertical = 0; m_posicio.horitzontal = 0; m_figuraCollocada = false; }
+	bool getFiguraCollocada() const { return m_figuraCollocada; }
 	
 	void inicialitza(const string& nomFitxer);
 	bool giraFigura(DireccioGir direccio);

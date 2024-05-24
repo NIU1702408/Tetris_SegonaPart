@@ -133,5 +133,6 @@ void Joc::escriuTauler(const string& nomFitxer)
 void Joc::dibuixa() const
 {
 	m_tauler.dibuixa();
-	m_figura.dibuixa();
+	if (!m_figuraCollocada)
+		m_figura.dibuixa();
 }
