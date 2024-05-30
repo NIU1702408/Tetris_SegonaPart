@@ -14,20 +14,13 @@ void Joc::inicialitza(const string& nomFitxer)
 	{
 		//llegeix figura, posició (x,y), gir (posició de la figura), i el tauler amb els seus colors
 		fitxer >> tipus;
-		m_figura.inicialitza(TipusFigura(tipus));
-
 		fitxer >> posicio.vertical >> posicio.horitzontal;
+		fitxer >> gir;
 
 		posicio.vertical--;
 		posicio.horitzontal--;
-
-		m_figura.setPosicio(posicio);
 		m_posicio = posicio;
-
-		fitxer >> gir;
-		for (int i = 0; i < gir; i++)
-			m_figura.girar(GIR_HORARI);
-
+		m_figura.inicialitza(TipusFigura(tipus), posicio, gir);
 		for (int i = 0; i < N_FILES_TAULER; i++)
 		{
 			for (int j = 0; j < N_COL_TAULER; j++)
@@ -43,11 +36,30 @@ void Joc::inicialitza(const string& nomFitxer)
 	}
 }
 
-void Joc::novaFigura(const TipusFigura& tipus)
+void Joc::novaFigura()
 {
-	m_figura.inicialitza(tipus);
-	m_posicio.horitzontal = 0;
-	m_posicio.vertical = 0;
+	TipusFigura figura;
+	int numGir;
+	Posicio pos;
+
+	// mou les figures de l'array i actualitza la nova figura actual
+	m_figura = m_cuaFigures[0];
+	m_shadow = m_cuaFigures[0];
+	for (int i = 0; i < MAX_CUA - 1; i++)
+		m_cuaFigures[i] = m_cuaFigures[i + 1];
+
+	// crea una nova figura que es guarda a l'última posicio de l'array
+	do
+	{
+		figura = TipusFigura(1 + rand() % N_TIPUS_FIGURES);
+		numGir = rand() % 3;
+		pos.vertical = 0;
+		pos.horitzontal = rand() % N_COL_TAULER;
+
+		m_cuaFigures[MAX_CUA - 1].inicialitza(figura, pos, numGir);
+	} while (!m_tauler.esMovimentValid(m_cuaFigures[MAX_CUA - 1], pos));
+
+	m_posicio = m_figura.getPosicio();
 	m_figuraCollocada = false;
 }
 
@@ -138,9 +150,30 @@ void Joc::escriuTauler(const string& nomFitxer)
 	}
 }
 
-void Joc::dibuixa() const
+void Joc::baixaShadow()
+{
+	m_shadow = m_figura;
+
+	while (m_tauler.esMovimentValid(m_shadow, m_shadow.getPosicio()))
+		m_shadow.baixar(1);
+	m_shadow.baixar(-1);
+}
+
+void Joc::dibuixaCua()
+{
+	GraphicManager::getInstance()->drawFont(FONT_WHITE_30, POS_X_TAULER + 380, POS_Y_TAULER, 1.0, "Next");
+	for (int i = 0; i < MAX_CUA; i++)
+		m_cuaFigures[i].dibuixaFiguraSmall(i + 1);
+}
+
+void Joc::dibuixa()
 {
 	m_tauler.dibuixa();
+	dibuixaCua();
 	if (!m_figuraCollocada)
-		m_figura.dibuixa();
+	{
+		baixaShadow();
+		m_shadow.dibuixa(true);
+		m_figura.dibuixa(false);
+	}
 }
