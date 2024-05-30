@@ -26,9 +26,28 @@
 
 #endif
 
-#include "./Partida.h"
+#include "./Tetris.h"
 #include "./InfoJoc.h"
 
+OpcioMenu menu()
+{
+    int opcio = 0;
+    cout << "MENU PRINCIPAL" << endl;
+    cout << "==============" << endl;
+    cout << "1. Joc en mode normal" << endl;
+    cout << "2. Joc en mode test" << endl;
+    cout << "3. Mostrar puntuacions" << endl;
+    cout << "4. Sortir" << endl;
+    cin >> opcio;
+
+    while (1 > opcio > 4)
+    {
+        cout << "Error: introdueix un altre caracter" << endl;
+        cin >> opcio;
+    }
+
+    return OpcioMenu(opcio);
+}
 
 int main(int argc, const char* argv[])
 {
@@ -36,32 +55,23 @@ int main(int argc, const char* argv[])
     SDL_SetMainReady();
     SDL_Init(SDL_INIT_VIDEO);
 
-    //Inicialitza un objecte de la classe Screen que s'utilitza per gestionar la finestra grafica
-    Screen pantalla(SCREEN_SIZE_X, SCREEN_SIZE_Y);
-    //Mostrem la finestra grafica
-    pantalla.show();
-
-    Partida game;
-
-    Uint64 NOW = SDL_GetPerformanceCounter();
-    Uint64 LAST = 0;
-    double deltaTime = 0;
+    Tetris tetris;
+    OpcioMenu opcio;
     do
     {
-        LAST = NOW;
-        NOW = SDL_GetPerformanceCounter();
-        deltaTime = (double)((NOW - LAST) / (double)SDL_GetPerformanceFrequency());
-
-        // Captura tots els events de ratolí i teclat de l'ultim cicle
-        pantalla.processEvents();
-
-        game.actualitza(deltaTime);
-
-        // Actualitza la pantalla
-        pantalla.update();
-
-    } while (!Keyboard_GetKeyTrg(KEYBOARD_ESCAPE));
-    // Sortim del bucle si pressionem ESC
+        opcio = menu();
+        switch (opcio)
+        {
+        case NORMAL:    tetris.juga(NORMAL);
+            break;
+        case TEST: tetris.juga(TEST);
+            break;
+        case PUNTUACIONS:   tetris.mostraPuntuacions();
+            break;
+        default:    cout << "E R R O R" << endl;
+            break;
+        }
+    } while (opcio != SORTIR);
 
     //Instruccio necesaria per alliberar els recursos de la llibreria 
     SDL_Quit();
