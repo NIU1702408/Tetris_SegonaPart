@@ -1,8 +1,24 @@
 #include "Tetris.h"
 
+void Tetris::inicialitzaNormal() 
+{
+    string fitxer;
+    string nom;
+
+    // Demana el nom per poder guardar la puntuació posteriorment
+    cout << "Nom del jugador: ";
+    cin >> nom;
+    cout << endl;
+    m_puntuacioActual.jugador = nom;
+
+    m_joc.inicialitza(fitxer); 
+}
+
 void Tetris::inicialitzaTest()
 {
+    string fitxer;
     string FitxerTauler, FitxerFigures, FitxerMoviments;
+
     cout << "Nom del fitxer amb l'estat inicial del tauler: ";
     cin >> FitxerTauler;
     cout << endl << "Nom del fitxer amb la sequencia de figures: ";
@@ -10,32 +26,19 @@ void Tetris::inicialitzaTest()
     cout << "Nom del fitxer amb la sequencia de moviments: ";
     cin >> FitxerMoviments;
     cout << endl;
-    string fitxer;
 
     m_joc.inicialitza(fitxer);
 }
 
-void Tetris::actualitzaPuntuacio(const string& nomJugador)
+void Tetris::actualitzaPuntuacio()
 {
     //escriu nova puntuacio al fitxer
-}
-
-void Tetris::finalitzaNormal()
-{
-    string nom;
-    cout << "Nom del jugador: ";
-    cin >> nom;
-    cout << endl;
-
-    actualitzaPuntuacio(nom);
 }
 
 void Tetris::juga(const OpcioMenu& mode)
 {
     //Inicialitza un objecte de la classe Screen que s'utilitza per gestionar la finestra grafica
     Screen pantalla(SCREEN_SIZE_X, SCREEN_SIZE_Y);
-    //Mostrem la finestra grafica
-    pantalla.show();
 
     Uint64 NOW = SDL_GetPerformanceCounter();
     Uint64 LAST = 0;
@@ -45,6 +48,9 @@ void Tetris::juga(const OpcioMenu& mode)
         inicialitzaNormal();
     else
         inicialitzaTest();
+
+    //Mostrem la finestra grafica
+    pantalla.show();
 
     do
     {
@@ -62,9 +68,8 @@ void Tetris::juga(const OpcioMenu& mode)
 
     } while (!Keyboard_GetKeyTrg(KEYBOARD_ESCAPE));
     // Sortim del bucle si pressionem ESC
-
-    if (NORMAL)
-        finalitzaNormal();
+    
+    actualitzaPuntuacio();
 }
 
 void Tetris::mostraPuntuacions() const

@@ -10,6 +10,7 @@
 #include <stdio.h>
 #include <cstdlib>
 #include <ctime>
+#include <vector>
 using namespace std;
 
 const int MAX_ALCADA = 4;
@@ -20,6 +21,21 @@ typedef struct
     int vertical;
     int horitzontal;
 } Posicio;
+
+typedef struct
+{
+    string jugador;
+    int xifra;
+} Puntuacio;
+
+typedef enum
+{
+    NONE = 0,
+    NORMAL,
+    TEST,
+    PUNTUACIONS,
+    SORTIR
+} OpcioMenu;
 
 typedef enum
 {

@@ -31,7 +31,7 @@
 
 OpcioMenu menu()
 {
-    int opcio = 0;
+    int opcio;
     cout << "MENU PRINCIPAL" << endl;
     cout << "==============" << endl;
     cout << "1. Joc en mode normal" << endl;
@@ -39,12 +39,6 @@ OpcioMenu menu()
     cout << "3. Mostrar puntuacions" << endl;
     cout << "4. Sortir" << endl;
     cin >> opcio;
-
-    while (1 > opcio > 4)
-    {
-        cout << "Error: introdueix un altre caracter" << endl;
-        cin >> opcio;
-    }
 
     return OpcioMenu(opcio);
 }
@@ -62,13 +56,18 @@ int main(int argc, const char* argv[])
         opcio = menu();
         switch (opcio)
         {
-        case NORMAL:    tetris.juga(NORMAL);
+        case NORMAL:    
+            tetris.juga(NORMAL);
             break;
-        case TEST: tetris.juga(TEST);
+        case TEST: 
+            tetris.juga(TEST);
             break;
-        case PUNTUACIONS:   tetris.mostraPuntuacions();
+        case PUNTUACIONS:   
+            tetris.mostraPuntuacions();
             break;
-        default:    cout << "E R R O R" << endl;
+        default:    
+            cout << "Error: introdueix un altre caracter" << endl << endl;
+            cin;
             break;
         }
     } while (opcio != SORTIR);
