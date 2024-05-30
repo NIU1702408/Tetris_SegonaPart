@@ -94,6 +94,48 @@ string GraphicManager::getImagePath(IMAGE_NAME name){
     case GRAFIC_QUADRAT_VERD:
         path = "data/Graphics/quadrat_verd.png";
         break;
+    case GRAFIC_QUADRAT_GROC_SHADOW:
+        path = "data/Graphics/quadrat_groc_ombra.png";
+        break;
+    case GRAFIC_QUADRAT_BLAUCEL_SHADOW:
+        path = "data/Graphics/quadrat_blaucel_ombra.png";
+        break;
+    case GRAFIC_QUADRAT_MAGENTA_SHADOW:
+        path = "data/Graphics/quadrat_magenta_ombra.png";
+        break;
+    case GRAFIC_QUADRAT_TARONJA_SHADOW:
+        path = "data/Graphics/quadrat_taronja_ombra.png";
+        break;
+    case GRAFIC_QUADRAT_BLAUFOSC_SHADOW:
+        path = "data/Graphics/quadrat_blaufosc_ombra.png";
+        break;
+    case GRAFIC_QUADRAT_VERMELL_SHADOW:
+        path = "data/Graphics/quadrat_vermell_ombra.png";
+        break;
+    case GRAFIC_QUADRAT_VERD_SHADOW:
+        path = "data/Graphics/quadrat_verd_ombra.png";
+        break;
+    case GRAFIC_QUADRAT_GROC_SMALL:
+        path = "data/Graphics/quadrat_groc_petit.png";
+        break;
+    case GRAFIC_QUADRAT_BLAUCEL_SMALL:
+        path = "data/Graphics/quadrat_blaucel_petit.png";
+        break;
+    case GRAFIC_QUADRAT_MAGENTA_SMALL:
+        path = "data/Graphics/quadrat_magenta_petit.png";
+        break;
+    case GRAFIC_QUADRAT_TARONJA_SMALL:
+        path = "data/Graphics/quadrat_taronja_petit.png";
+        break;
+    case GRAFIC_QUADRAT_BLAUFOSC_SMALL:
+        path = "data/Graphics/quadrat_blaufosc_petit.png";
+        break;
+    case GRAFIC_QUADRAT_VERMELL_SMALL:
+        path = "data/Graphics/quadrat_vermell_petit.png";
+        break;
+    case GRAFIC_QUADRAT_VERD_SMALL:
+        path = "data/Graphics/quadrat_verd_petit.png";
+        break;
     default:
         path = "";
         break;

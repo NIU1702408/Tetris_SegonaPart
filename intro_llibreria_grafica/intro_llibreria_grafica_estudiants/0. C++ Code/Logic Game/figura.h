@@ -8,8 +8,8 @@ class Figura
 {
 public:
     Figura();
-    Figura(TipusFigura figura);
-    Figura(TipusFigura figura, Posicio posicio);
+    Figura(const TipusFigura& figura,const Posicio& pos,const int& numGir);
+    void inicialitza(const TipusFigura& figura, const Posicio& pos, const int& numGir);
 
     ColorFigura getColor() const { return m_color; }
     int getMida() const { return m_mida; }
@@ -17,11 +17,13 @@ public:
     Posicio getPosicio() const { return m_posicio; }
     void setPosicio(const Posicio& pos) { m_posicio = pos; }
 
-    void dibuixa() const;
-    void inicialitza(TipusFigura figura);
     void girar(const DireccioGir& gir);
-    void baixar(const int& dirY);
-    void desplacar(const int& dirX);
+    void baixar(const int& dirY) { m_posicio.vertical += dirY; }
+    void desplacar(const int& dirX) { m_posicio.horitzontal += dirX; }
+
+    void dibuixa(const bool& shadow) const;
+    void dibuixaFiguraSmall(const int& posCua) const;
+
 private:
     TipusFigura m_tipusFigura; //forma de la figura
     ColorFigura m_color;

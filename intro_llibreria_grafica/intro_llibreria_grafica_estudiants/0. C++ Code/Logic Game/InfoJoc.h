@@ -9,6 +9,7 @@
 #include <fstream>
 #include <stdio.h>
 #include <cstdlib>
+#include <ctime>
 using namespace std;
 
 const int MAX_ALCADA = 4;
@@ -70,6 +71,13 @@ const int SCREEN_SIZE_Y = 700;
 
 // Mida dels quadrats que formen el tauler
 const int MIDA_QUADRAT = 26;
+const int MIDA_QUADRAT_SMALL = 13;
+
+// Temps que apareixen els missatges temporals
+const int TEMPS_MISSATGE = 2;
+
+// Maxim de figures a la cua
+const int MAX_CUA = 3;
 
 // Tamany del tauler
 const int N_FILES_TAULER = 21;
