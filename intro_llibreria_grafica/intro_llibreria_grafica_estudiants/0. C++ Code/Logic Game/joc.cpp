@@ -36,33 +36,6 @@ void Joc::inicialitza(const string& nomFitxer)
 	}
 }
 
-void Joc::novaFigura()
-{
-	TipusFigura figura;
-	int numGir;
-	Posicio pos;
-
-	// mou les figures de l'array i actualitza la nova figura actual
-	m_figura = m_cuaFigures[0];
-	m_shadow = m_cuaFigures[0];
-	for (int i = 0; i < MAX_CUA - 1; i++)
-		m_cuaFigures[i] = m_cuaFigures[i + 1];
-
-	// crea una nova figura que es guarda a l'última posicio de l'array
-	do
-	{
-		figura = TipusFigura(1 + rand() % N_TIPUS_FIGURES);
-		numGir = rand() % 3;
-		pos.vertical = 0;
-		pos.horitzontal = rand() % N_COL_TAULER;
-
-		m_cuaFigures[MAX_CUA - 1].inicialitza(figura, pos, numGir);
-	} while (!m_tauler.esMovimentValid(m_cuaFigures[MAX_CUA - 1], pos));
-
-	m_posicio = m_figura.getPosicio();
-	m_figuraCollocada = false;
-}
-
 //gira la figura en la direcció especificada, verifica si el moviment és vàlid i ajusta la rotació de la figura en cas de que no ho sigui
 bool Joc::giraFigura(DireccioGir direccio)
 {
@@ -121,6 +94,42 @@ int Joc::baixaFigura()
 	return nFiles;
 }
 
+//guarda la figura que se li passa per parametre
+void Joc::novaFigura(const Figura& figura)
+{
+	m_figura = figura;
+	m_posicio = m_figura.getPosicio();
+	m_figuraCollocada = false;
+}
+
+//genera una nova figura aleatòria i la guarda a la cua
+void Joc::novaFigura()
+{
+	TipusFigura figura;
+	int numGir;
+	Posicio pos;
+
+	// mou les figures de l'array i actualitza la nova figura actual
+	m_figura = m_cuaFigures[0];
+	m_shadow = m_cuaFigures[0];
+	for (int i = 0; i < MAX_CUA - 1; i++)
+		m_cuaFigures[i] = m_cuaFigures[i + 1];
+
+	// crea una nova figura que es guarda a l'última posicio de l'array
+	do
+	{
+		figura = TipusFigura(1 + rand() % N_TIPUS_FIGURES);
+		numGir = rand() % 3;
+		pos.vertical = 0;
+		pos.horitzontal = rand() % N_COL_TAULER;
+
+		m_cuaFigures[MAX_CUA - 1].inicialitza(figura, pos, numGir);
+	} while (!m_tauler.esMovimentValid(m_cuaFigures[MAX_CUA - 1], pos));
+
+	m_posicio = m_figura.getPosicio();
+	m_figuraCollocada = false;
+}
+
 //escriu l'estat actual del tauler en un fitxer passat com a paràmetre
 void Joc::escriuTauler(const string& nomFitxer)
 {
@@ -161,9 +170,14 @@ void Joc::baixaShadow()
 
 void Joc::dibuixaCua()
 {
-	GraphicManager::getInstance()->drawFont(FONT_WHITE_30, POS_X_TAULER + 380, POS_Y_TAULER, 1.0, "Next");
-	for (int i = 0; i < MAX_CUA; i++)
-		m_cuaFigures[i].dibuixaFiguraSmall(i + 1);
+	// si l'array té contingut (NO_COLOR es el color per defecte)
+	if (m_cuaFigures[MAX_CUA - 1].getColor() != NO_COLOR)
+	{
+		GraphicManager::getInstance()->drawFont(FONT_WHITE_30, POS_X_TAULER + 380, POS_Y_TAULER, 1.0, "Next");
+		for (int i = 0; i < MAX_CUA; i++)
+			m_cuaFigures[i].dibuixaFiguraSmall(i + 1);
+	}
+
 }
 
 void Joc::dibuixa()
@@ -176,4 +190,18 @@ void Joc::dibuixa()
 		m_shadow.dibuixa(true);
 		m_figura.dibuixa(false);
 	}
+}
+
+bool Joc::comprovaGameOver() const
+{
+	bool trobat = false;
+	int i = 0;
+
+	while (!trobat && i < N_COL_TAULER)
+	{
+		if (m_tauler.getTauler(0, i) != COLOR_NEGRE)
+			trobat = true;
+		i++;
+	}
+	return trobat;
 }

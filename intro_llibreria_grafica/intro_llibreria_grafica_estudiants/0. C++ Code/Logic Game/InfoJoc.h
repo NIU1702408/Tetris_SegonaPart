@@ -45,6 +45,16 @@ typedef enum
 
 typedef enum
 {
+    MOVIMENT_ESQUERRA,
+    MOVIMENT_DRETA,
+    MOVIMENT_GIR_HORARI,
+    MOVIMENT_GIR_ANTI_HORARI,
+    MOVIMENT_BAIXA,
+    MOVIMENT_BAIXA_FINAL,
+} TipusMoviment;
+
+typedef enum
+{
     TECLA_ESQUERRA,
     TECLA_DRETA,
     TECLA_AMUNT,

@@ -4,28 +4,27 @@
 
 using namespace std;
 
-class Partida 
+class Partida
 {
 public:
-    Partida() : m_temps(0), m_speed(1.0), m_puntuacio(0), m_filesEliminades(0), m_nivell(0) , m_missatge(""), m_missatgeTemps(0)
-    {
-        srand(static_cast<unsigned>(time(0)));
-        for (int i = 0; i < MAX_CUA + 1; i++)
-            m_joc.novaFigura();
-    };
-    Partida(const string& nomFitxer) : m_temps(0), m_speed(1.0), m_puntuacio(0), m_filesEliminades(0), m_nivell(0), m_missatge(""), m_missatgeTemps(0)
-        { m_joc.inicialitza(nomFitxer); }   
+    Partida() : m_temps(0), m_speed(1.0), m_puntuacio(0), m_filesEliminades(0), m_nivell(1), m_missatge(""), m_missatgeTemps(0) {};
+    int getPuntuacio() const { return m_puntuacio; }
 
-    void inicialitza(const string& nomFitxer) 
-        { m_temps = 0; m_speed = 1.0; m_puntuacio = 0; m_filesEliminades = 0; m_nivell = 0; m_missatge = ""; m_missatgeTemps = 0;
-        m_joc.inicialitza(nomFitxer); }
-    void actualitza(double deltaTime);
+    void inicialitza(const OpcioMenu& mode, const string& fitxerTauler, const string& fitxerFigures, const string& fitxerMoviments);
+    void actualitza(double deltaTime, bool gameOver);
 private:
     void actualitzaValors();
+    void actualitzaFiles(const int& files);
+    void dibuixaPartida();
 
     Joc m_joc;
+    OpcioMenu m_mode;
     double m_temps;
     double m_speed;
+
+    //cua de figures i moviments pel metode test
+    Figura* m_nextFigura;
+    TipusMoviment* m_nextMoviment;
 
     //registre de valors
     int m_puntuacio;

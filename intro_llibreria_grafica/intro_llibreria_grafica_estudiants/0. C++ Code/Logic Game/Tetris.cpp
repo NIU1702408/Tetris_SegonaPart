@@ -1,8 +1,7 @@
 #include "Tetris.h"
 
-void Tetris::inicialitzaNormal() 
+void Tetris::inicialitzaNormal()
 {
-    string fitxer;
     string nom;
 
     // Demana el nom per poder guardar la puntuació posteriorment
@@ -11,23 +10,22 @@ void Tetris::inicialitzaNormal()
     cout << endl;
     m_puntuacioActual.jugador = nom;
 
-    m_joc.inicialitza(fitxer); 
+    m_joc.inicialitza(NORMAL, "", "", "");
 }
 
 void Tetris::inicialitzaTest()
 {
-    string fitxer;
-    string FitxerTauler, FitxerFigures, FitxerMoviments;
+    string fitxerTauler, fitxerFigures, fitxerMoviments;
 
     cout << "Nom del fitxer amb l'estat inicial del tauler: ";
-    cin >> FitxerTauler;
+    cin >> fitxerTauler;
     cout << endl << "Nom del fitxer amb la sequencia de figures: ";
-    cin >> FitxerFigures;
+    cin >> fitxerFigures;
     cout << "Nom del fitxer amb la sequencia de moviments: ";
-    cin >> FitxerMoviments;
+    cin >> fitxerMoviments;
     cout << endl;
 
-    m_joc.inicialitza(fitxer);
+    m_joc.inicialitza(TEST, fitxerTauler, fitxerFigures, fitxerMoviments);
 }
 
 void Tetris::actualitzaPuntuacio()
@@ -35,6 +33,13 @@ void Tetris::actualitzaPuntuacio()
     //escriu nova puntuacio al fitxer
     ofstream file("puntuacio.txt", ios::app);
     file << m_puntuacioActual.jugador << ": " << m_puntuacioActual.xifra << endl;
+}
+
+void showGameOver()
+{
+    GraphicManager::getInstance()->drawSprite(GRAFIC_FONS, 0, 0, false);
+    GraphicManager::getInstance()->drawFont(FONT_WHITE_30, POS_X_TAULER, POS_Y_TAULER, 1.0, "G A M E  O V E R");
+    GraphicManager::getInstance()->drawFont(FONT_WHITE_30, POS_X_TAULER, POS_Y_TAULER + 50, 1.0, "Prem Esc per sortir");
 }
 
 void Tetris::juga(const OpcioMenu& mode)
@@ -45,6 +50,7 @@ void Tetris::juga(const OpcioMenu& mode)
     Uint64 NOW = SDL_GetPerformanceCounter();
     Uint64 LAST = 0;
     double deltaTime = 0;
+    bool gameOver = false;
 
     if (mode == NORMAL)
         inicialitzaNormal();
@@ -63,7 +69,10 @@ void Tetris::juga(const OpcioMenu& mode)
         // Captura tots els events de ratolí i teclat de l'ultim cicle
         pantalla.processEvents();
 
-        m_joc.actualitza(deltaTime);
+        if (!gameOver)
+            m_joc.actualitza(deltaTime, gameOver);
+        else
+            showGameOver();
 
         // Actualitza la pantalla
         pantalla.update();
