@@ -11,6 +11,7 @@
 #include <cstdlib>
 #include <ctime>
 #include <vector>
+#include "Cua.h"
 using namespace std;
 
 const int MAX_ALCADA = 4;

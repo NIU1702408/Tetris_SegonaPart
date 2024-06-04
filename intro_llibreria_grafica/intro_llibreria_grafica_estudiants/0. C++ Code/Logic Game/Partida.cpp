@@ -1,5 +1,62 @@
 #include "Partida.h"
 
+void Partida::inicialitzaFigures(const string& fitxerFigures)
+{
+	Posicio posicio;
+	int tipus, gir;
+	ifstream fitxer;
+	Figura figura;
+
+	fitxer.open(fitxerFigures);
+
+	if (fitxer.is_open())
+	{
+		// llegeix figura, posició (x,y), gir (posició de la figura), i el tauler amb els seus colors
+		fitxer >> tipus;
+		fitxer >> posicio.vertical >> posicio.horitzontal;
+		fitxer >> gir;
+		posicio.vertical--;
+		posicio.horitzontal--;
+		figura.inicialitza(TipusFigura(tipus), posicio, gir);
+
+		m_figuraNodes->afegeix(figura);
+
+		while (!fitxer.eof())
+		{
+			fitxer >> tipus;
+			fitxer >> posicio.vertical >> posicio.horitzontal;
+			fitxer >> gir;
+			posicio.vertical--;
+			posicio.horitzontal--;
+			figura.inicialitza(TipusFigura(tipus), posicio, gir);
+
+			m_figuraNodes->afegeix(figura);
+		}
+		fitxer.close();
+	}
+}
+
+void Partida::inicialitzaMoviments(const string& fitxerMoviments)
+{
+	int moviment;
+	ifstream fitxer;
+
+	fitxer.open(fitxerMoviments);
+
+	if (fitxer.is_open()) {
+		fitxer >> moviment;
+
+		m_movimentNodes->afegeix(moviment);
+
+		while (!fitxer.eof())
+		{
+			fitxer >> moviment;
+			m_movimentNodes->afegeix(moviment);
+		}
+		fitxer.close();
+	}
+}
+
 void Partida::inicialitza(const OpcioMenu& mode, const string& fitxerTauler, const string& fitxerFigures, const string& fitxerMoviments)
 {
 	m_mode = mode;
@@ -15,9 +72,8 @@ void Partida::inicialitza(const OpcioMenu& mode, const string& fitxerTauler, con
 	else
 	{
 		m_joc.inicialitza(fitxerTauler);
-
-		//inicialitzaFigures(fitxerFigures);
-		//inicialitzaMoviments(fitxerMoviments);
+		inicialitzaFigures(fitxerFigures);
+		inicialitzaMoviments(fitxerMoviments);
 	}
 }
 
@@ -111,16 +167,26 @@ void Partida::actualitza(double deltaTime, bool gameOver)
 	}
 	else
 	{
-		/*
+		
 		if (!m_joc.getFiguraCollocada())
 		{
-
+			if (!m_figuraNodes->esBuida())
+			{
+				Figura figura = m_figuraNodes->getPrimer();
+				m_joc.novaFigura(figura);
+				m_figuraNodes->treu();
+			}
 		}
 		else
 		{
-			m_joc.novaFigura(m_nextFigura);
-			actualitzaValors();
-		}*/
+			if (!m_figuraNodes->esBuida())
+			{
+				Figura figura = m_figuraNodes->getPrimer();
+				m_joc.novaFigura(figura);
+				m_figuraNodes->treu();
+				actualitzaValors();
+			}
+		}
 	}
 	gameOver = m_joc.comprovaGameOver();
 }

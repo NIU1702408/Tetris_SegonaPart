@@ -13,6 +13,8 @@ public:
     void inicialitza(const OpcioMenu& mode, const string& fitxerTauler, const string& fitxerFigures, const string& fitxerMoviments);
     void actualitza(double deltaTime, bool gameOver);
 private:
+    void inicialitzaFigures(const string& fitxerFigures);
+    void inicialitzaMoviments(const string& fitxerMoviments);
     void actualitzaValors();
     void actualitzaFiles(const int& files);
     void dibuixaPartida();
@@ -23,8 +25,8 @@ private:
     double m_speed;
 
     //cua de figures i moviments pel metode test
-    Figura* m_nextFigura;
-    TipusMoviment* m_nextMoviment;
+    CuaFigura* m_figuraNodes;
+    CuaMoviment* m_movimentNodes;
 
     //registre de valors
     int m_puntuacio;
