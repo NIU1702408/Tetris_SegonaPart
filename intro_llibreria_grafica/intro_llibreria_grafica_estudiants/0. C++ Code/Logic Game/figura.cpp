@@ -4,11 +4,14 @@
 Figura::Figura()
 {
 	m_mida = 0;
+	m_fila = -1;
+	m_columna = -1;
+	m_gir = 0;
 	m_color = NO_COLOR;
 	m_tipusFigura = NO_FIGURA;
 	m_posicio.vertical = 0;
 	m_posicio.horitzontal = 0;
-
+	m_moviment = true;
 	for (int i = 0; i < MAX_ALCADA; i++)
 		for (int j = 0; j < MAX_AMPLADA; j++)
 			m_figura[i][j] = NO_COLOR;
@@ -93,13 +96,10 @@ Figura::Figura(const TipusFigura& figura, const Posicio& pos, const int& numGir)
 		girar(GIR_HORARI);
 }
 
-//Inicialitza una figura com amb el constructor, però permet reinicialitzar una figura existent amb un nou tipus
-void Figura::inicialitza(const TipusFigura& figura, const Posicio& pos, const int& numGir)
+//Inicialitza una figura com amb el constructor, perÃ² permet reinicialitzar una figura existent amb un nou tipus
+void Figura::inicialitza()
 {
-	m_mida = 0;
-	m_tipusFigura = figura;
-	m_posicio = pos;
-
+	
 	//inicialitzem matriu de la figura
 	for (int i = 0; i < MAX_ALCADA; i++)
 		for (int j = 0; j < MAX_AMPLADA; j++)
@@ -166,9 +166,6 @@ void Figura::inicialitza(const TipusFigura& figura, const Posicio& pos, const in
 		break;
 	}
 
-	//gira la figura en sentit horari el nombre de vegades que indica la variable
-	for (int i = 0; i < numGir; i++)
-		girar(GIR_HORARI);
 }
 
 IMAGE_NAME colorToPng(ColorFigura color)
@@ -277,7 +274,7 @@ void Figura::dibuixaFiguraSmall(const int& posCua) const
 	}
 }
 
-//gira la figura en la direccióGir (horaria o antihoraria)
+//gira la figura en la direcciÃ³Gir (horaria o antihoraria)
 void Figura::girar(const DireccioGir& gir)
 {
 	ColorFigura transposada[MAX_ALCADA][MAX_AMPLADA];
@@ -292,7 +289,7 @@ void Figura::girar(const DireccioGir& gir)
 		for (int j = 0; j < m_mida; ++j)
 			m_figura[i][j] = transposada[i][j];
 
-	//Inverteix matriu segons la direcció de gir
+	//Inverteix matriu segons la direcciÃ³ de gir
 	if (gir == GIR_HORARI)
 	{
 		for (int i = 0; i < m_mida; ++i)
@@ -307,4 +304,15 @@ void Figura::girar(const DireccioGir& gir)
 	for (int i = 0; i < m_mida; ++i)
 		for (int j = 0; j < m_mida; ++j)
 			m_figura[i][j] = invertir[i][j];
+}
+
+ifstream& operator>>(ifstream& input, Figura& figura)
+{
+	int tipus, fila, columna, gir;
+	input >> tipus >> fila >> columna >> gir;
+	figura.setTipus((TipusFigura)tipus);
+	figura.setFila(fila);
+	figura.setColumna(columna);
+	figura.setGir(gir);
+	return input;
 }
