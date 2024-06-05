@@ -97,9 +97,12 @@ Figura::Figura(const TipusFigura& figura, const Posicio& pos, const int& numGir)
 }
 
 //Inicialitza una figura com amb el constructor, però permet reinicialitzar una figura existent amb un nou tipus
-void Figura::inicialitza()
+void Figura::inicialitza(const TipusFigura& figura, const Posicio& pos, const int& numGir)
 {
-	
+	m_mida = 0;
+	m_tipusFigura = figura;
+	m_posicio = pos;
+
 	//inicialitzem matriu de la figura
 	for (int i = 0; i < MAX_ALCADA; i++)
 		for (int j = 0; j < MAX_AMPLADA; j++)
@@ -166,6 +169,31 @@ void Figura::inicialitza()
 		break;
 	}
 
+	//gira la figura en sentit horari el nombre de vegades que indica la variable
+	for (int i = 0; i < numGir; i++)
+		girar(GIR_HORARI);
+}
+
+Figura& Figura::operator=(const Figura& other) {
+	if (this != &other) { // Comprova l'autoassignació
+		// Assigna els valors dels membres de dades
+		m_mida = other.m_mida;
+		m_fila = other.m_fila;
+		m_columna = other.m_columna;
+		m_gir = other.m_gir;
+		m_color = other.m_color;
+		m_tipusFigura = other.m_tipusFigura;
+		m_posicio = other.m_posicio;
+		m_moviment = other.m_moviment;
+
+		// Copia profunda de la matriu m_figura
+		for (int i = 0; i < MAX_ALCADA; ++i) {
+			for (int j = 0; j < MAX_AMPLADA; ++j) {
+				m_figura[i][j] = other.m_figura[i][j];
+			}
+		}
+	}
+	return *this;
 }
 
 IMAGE_NAME colorToPng(ColorFigura color)
