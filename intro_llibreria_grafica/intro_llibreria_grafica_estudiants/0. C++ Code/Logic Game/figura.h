@@ -9,7 +9,7 @@ class Figura
 public:
     Figura();
     Figura(const TipusFigura& figura,const Posicio& pos,const int& numGir);
-    void inicialitza();
+    void inicialitza(const TipusFigura& figura, const Posicio& pos, const int& numGir);
 
     ColorFigura getColor() const { return m_color; }
     int getMida() const { return m_mida; }
