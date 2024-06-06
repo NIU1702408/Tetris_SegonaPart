@@ -11,6 +11,8 @@ public:
     Figura(const TipusFigura& figura,const Posicio& pos,const int& numGir);
     void inicialitza(const TipusFigura& figura, const Posicio& pos, const int& numGir);
 
+    Figura& operator=(const Figura& other);
+
     ColorFigura getColor() const { return m_color; }
     int getMida() const { return m_mida; }
     ColorFigura getFigura(const int& x, const int& y) const { return m_figura[x][y]; }
